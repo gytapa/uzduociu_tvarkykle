@@ -1,0 +1,9 @@
+<link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" />
+<link rel="stylesheet" href="{{ asset('css/main.css') }}" />
+<link rel="stylesheet" href="{{ asset('css/login.css') }}" />
+<div style="width: 50%; margin: auto">
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+{{ form_start(form) }}
+{{ form_widget(form) }}
+{{ form_end(form) }}
+</div>

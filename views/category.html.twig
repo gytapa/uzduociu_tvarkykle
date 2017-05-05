@@ -1,0 +1,23 @@
+<link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" />
+<link rel="stylesheet" href="{{ asset('css/main.css') }}" />
+<link rel="stylesheet" href="{{ asset('css/login.css') }}" />
+<div>
+    <h1>List of Task Categories</h1>
+    ><a href="/editcat/{{ 0 }}" > Click Here to add new category </a>
+    <table class="table">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Creation Date</th>
+        </tr>
+        {% for category in categories %}
+        <tr>
+            <td>{{  category.Id }}</td>
+            <td>{{ category.Name }}</td>
+            <td>{{ category.CreationDate|date("m/d/Y") }}</td>
+            <td><a id="myLink" href="/editcat/{{ category.ID }}" > Edit </a></td>
+            <td><a id="myLink" href="/deletecat/{{ category.ID }}" >Delete</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
