@@ -1,10 +1,14 @@
+<link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" />
+<link rel="stylesheet" href="{{ asset('css/main.css') }}" />
+<link rel="stylesheet" href="{{ asset('css/login.css') }}" />
 <div>
     <h1>Task manager KTU IFF-5/1</h1>
     <h2>Welcome, user {{ username }}</h2>
-
-    ><a href="/edit/{{ 0 }}" > Click Here to add new task </a>
-    ><a href="/category" > Click Here to go to category page </a>
-    <table>
+    <ul>
+        <li> <a href="/edit/{{ 0 }}" > Click Here to add new task </a></li>
+        <li> <a href="/category" > Click Here to go to category page </a></li>
+    </ul>
+        <table class="table">
         <tr>
             <th>ID</th>
             <th>Status</th>

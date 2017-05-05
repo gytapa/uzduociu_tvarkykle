@@ -23,22 +23,6 @@ class HomeController extends Controller
      */
     public function succesfulLogin(Request $request)
     {
-/*
-        $task = new Task();
-        $task->setStatus('Naujas');
-        $task->setName("Iskept bulviu ir kotletu");
-        $task->setDescription('Reikia iskept nes nepavalgius bus blogai');
-        $task->setCategory("butinas");
-        $task->setAuthor("admin");
-        $task->setCreationDate(date_create("2017-04-17"));
-
-        $em = $this->getDoctrine()->getManager();
-
-        // tells Doctrine you want to (eventually) save the Product (no queries yet)
-        $em->persist($task);
-
-        // actually executes the queries (i.e. the INSERT query)
-        $em->flush();*/
 
         $repository = $this->getDoctrine()->getRepository('AppBundle:Task');
         $tasks = $repository->findByAuthor($this->getUser()->getUsername());
@@ -47,4 +31,13 @@ class HomeController extends Controller
             'userpage.html.twig',array('username' => $username = $this->getUser()->getUsername(), 'tasks' => $tasks ));
 
     }
+
+    /**
+     * @Route("/")
+     */
+    public function indexPage(Request $request)
+    {
+        return $this->render('index.html.twig');
+    }
 }
+

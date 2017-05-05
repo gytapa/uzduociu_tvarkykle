@@ -1,10 +1,23 @@
 {# app/Resources/views/registration/register.html.twig #}
+<link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" />
+<link rel="stylesheet" href="{{ asset('css/main.css') }}" />
+<link rel="stylesheet" href="{{ asset('css/login.css') }}" />
+<h2 class="form-signin-heading">Please Register</h2>
+{{ form(form, {'attr': {'class': 'form-signin'}}) }}
+{% form_theme form _self %}
 
+{% block integer_widget %}
+    <div class="integer_widget">
+        {% set type = type|default('number') %}
+        {{ block('form_widget_simple') }}
+    </div>
+{% endblock %}
 {{ form_start(form) }}
-    {{ form_row(form.username) }}
+    {{ form_row(form.username, {'attr': {'class': 'loginForm'}})  }}
     {{ form_row(form.email) }}
     {{ form_row(form.plainPassword.first) }}
     {{ form_row(form.plainPassword.second) }}
-
-<button type="submit">Register!</button>
+<button type="submit" class="btn btn-lg btn-primary btn-block">Register!</button>
 {{ form_end(form) }}
+
+class="form-control"
