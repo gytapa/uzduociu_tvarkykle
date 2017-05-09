@@ -1,6 +1,7 @@
 <?php
 // src/AppBundle/Entity/User.php
 namespace AppBundle\Entity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -21,16 +22,19 @@ class User implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(type="string", length=25, unique=true)
+     * @Assert\Type("string")
      */
     private $username;
 
     /**
      * @ORM\Column(type="string", length=64)
+     * @Assert\Type("string")
      */
     private $password;
 
     /**
      * @ORM\Column(type="string", length=60, unique=true)
+     * @Assert\Type("string")
      */
     private $email;
 
@@ -39,9 +43,15 @@ class User implements UserInterface, \Serializable
      */
     private $isActive;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Task", mappedBy="User")
+     */
+    private $tasks;
+
     public function __construct()
     {
         $this->isActive = true;
+        $this->tasks = new ArrayCollection();
         // may not be needed, see section on salt below
         // $this->salt = md5(uniqid(null, true));
     }

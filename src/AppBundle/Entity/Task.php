@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -18,26 +19,39 @@ class Task
     private $id;
     /**
      * @ORM\Column(type="string", length=100)
+     * @Assert\Type("string")
      */
     private $status;
     /**
      * @ORM\Column(type="string", length=100)
+     * @Assert\Type("string")
      */
     private $name;
     /**
      * @ORM\Column(type="text")
+     * @Assert\Type("string")
+     * Assert\Length(
+     *      min = 2,
+     *      max = 200
+     *     )
      */
     private $description;
     /**
      * @ORM\Column(type="string", length=100)
+     * @Assert\Type("string")
      */
     private $category;
     /**
+     *
      * @ORM\Column(type="string", length=100)
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="Task")
+     * @Assert\Type("string")
+     *
      */
     private $author;
     /**
      * @ORM\Column(type="date")
+     * @Assert\Type("date")
      */
     private $creation_date;
 

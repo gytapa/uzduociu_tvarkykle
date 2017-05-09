@@ -7,7 +7,8 @@
  */
 
 namespace AppBundle\Controller;
-use AppBundle\Form\UserType;
+use AppBundle\Form\DateType;
+use AppBundle\Form\CategoryType;
 use AppBundle\Entity\User;
 use AppBundle\Entity\Task;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -15,9 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use AppBundle\Entity\Category;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+
 
 class CategoryController extends Controller
 {
@@ -36,23 +35,18 @@ class CategoryController extends Controller
     }
 
     /**
-     * @Route("/editcat/{id}")
+     * @Route("/editcat/{id}",name="editCat")
      *
      */
     public function editAction(Request $request, $id)
     {
         if ($id > 0) {
-            //return new Response('<html><body>Admin page!</body></html>');
             $repository = $this->getDoctrine()
                 ->getRepository('AppBundle:Category');
             $em = $this->getDoctrine()->getManager();
             $task = $repository->find($id);
 
-            $form = $this->createFormBuilder($task)
-                ->add('name', TextType::class)
-                ->add('creationDate', DateType::class)
-                ->add('save', SubmitType::class, array('label' => 'Apply Changes'))
-                ->getForm();
+            $form = $this->createForm(CategoryType::class, $task);
 
             $form->handleRequest($request);
 
@@ -76,11 +70,7 @@ class CategoryController extends Controller
             ));
         } else {
             $taskToAdd = new Category();
-            $form = $this->createFormBuilder()
-                ->add('name', TextType::class)
-                ->add('creationDate', DateType::class)
-                ->add('save', SubmitType::class, array('label' => 'Apply Changes'))
-                ->getForm();
+            $form = $this->createForm(CategoryType::class, $taskToAdd);
 
             $form->handleRequest($request);
 
@@ -88,7 +78,7 @@ class CategoryController extends Controller
                 // $form->getData() holds the submitted values
                 // but, the original `$task` variable has also been updated
                 $em = $this->getDoctrine()->getManager();
-                $task = $form->getData();
+                $taskToAdd = $form->getData();
                 $taskToAdd = new Category();
                 $taskToAdd->setName($task['name']);
                 $taskToAdd->setCreationDate($task['creationDate']);
@@ -114,7 +104,7 @@ class CategoryController extends Controller
     }
 
     /**
-     * @Route("/deletecat/{id}")
+     * @Route("/deletecat/{id}",name="deleteCat")
      */
     public function adminAction($id)
     {

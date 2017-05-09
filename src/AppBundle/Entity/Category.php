@@ -8,6 +8,7 @@
 
 namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -23,10 +24,12 @@ class Category
     private $id;
     /**
      * @ORM\Column(type="string", length=100)
+     * @Assert\Type("string")
      */
     private $name;
     /**
      * @ORM\Column(type="date")
+     * @Assert\Type("date")
      */
     private $creationDate;
 

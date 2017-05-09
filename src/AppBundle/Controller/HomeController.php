@@ -29,11 +29,12 @@ class HomeController extends Controller
 
         return $this->render(
             'userpage.html.twig',array('username' => $username = $this->getUser()->getUsername(), 'tasks' => $tasks ));
+        $user->getTasks();
 
     }
 
     /**
-     * @Route("/")
+     * @Route("/",name="index")
      */
     public function indexPage(Request $request)
     {

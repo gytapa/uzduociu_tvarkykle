@@ -4,7 +4,7 @@
 
 namespace AppBundle\Controller;
 use AppBundle\Entity\Category;
-use AppBundle\Form\UserType;
+use AppBundle\Form\TaskType;
 use AppBundle\Entity\User;
 use AppBundle\Entity\Task;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
 class TaskController extends Controller
 {
     /**
-     * @Route("/edit/{id}")
+     * @Route("/edit/{id}",name="editTask")
      *
      */
     public function editAction(Request $request, $id)
@@ -39,24 +39,10 @@ class TaskController extends Controller
             $em = $this->getDoctrine()->getManager();
             $task = $repository->find($id);
 
-            $form = $this->createFormBuilder($task)
-                ->add('Category', ChoiceType::class, array(
-                    'choices'  => array(
-                        "New" => 'New',
-                        "In progress" => 'In Progress',
-                        "Completed" => 'Completed'
-                    )))
-                ->add('name', TextType::class)
-                ->add('description', TextType::class)
-                ->add('Category', ChoiceType::class, array(
-                    'choices'  => $categories))
-                ->add('author', TextType::class, array(
-                    'disabled' => true,
-                    'data' => $this->getUser()->getUsername()
-                ))
-                ->add('creation_date', DateType::class)
-                ->add('save', SubmitType::class, array('label' => 'Apply Changes'))
-                ->getForm();
+            /*$options = ["username" =>$this->getUser()->getUsername(),
+                        "categories" => $categories,
+                        "create" => true];*/
+            $form = $this->createForm(TaskType::class, $task, ["username" =>$this->getUser()->getUsername(),"categories" => $categories,"create" => false]);
 
             $form->handleRequest($request);
 
@@ -72,22 +58,7 @@ class TaskController extends Controller
         else
         {
             $emptyTask = new Task();
-            $form = $this->createFormBuilder()
-                ->add('Status', TextType::class, array(
-                    'disabled' => true,
-                    'data' => 'New'
-                ))
-                ->add('name', TextType::class)
-                ->add('description', TextType::class)
-                ->add('Category', ChoiceType::class, array(
-                    'choices'  => $categories))
-                ->add('author', TextType::class, array(
-                    'disabled' => true,
-                    'data' => $this->getUser()->getUsername()
-                ))
-                ->add('creation_date', DateType::class)
-                ->add('save', SubmitType::class, array('label' => 'Apply Changes'))
-                ->getForm();
+            $form = $this->createForm(TaskType::class, $emptyTask, ["username" =>$this->getUser()->getUsername(),"categories" => $categories,"create" => true]);
 
             $form->handleRequest($request);
 
@@ -104,12 +75,6 @@ class TaskController extends Controller
                 $taskToAdd->setAuthor($task['author']);
                 $taskToAdd->setCreationDate($task['creation_date']);
 
-
-                // ... perform some action, such as saving the task to the database
-                // for example, if Task is a Doctrine entity, save it!
-                // $em = $this->getDoctrine()->getManager();
-                // $em->persist($task);
-                // $em->flush();
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($taskToAdd);
                 $em->flush();
@@ -121,11 +86,11 @@ class TaskController extends Controller
                 'form' => $form->createView(),
             ));
         }
-        ///home/gytis/uzduociu_tvarkykle/taskmanager/app/Resources/views/taskmanipulation.html.twig
+
     }
 
     /**
-     * @Route("/delete/{id}")
+     * @Route("/delete/{id}",name="deleteTask")
      */
     public function adminAction($id)
     {
@@ -139,3 +104,14 @@ class TaskController extends Controller
     }
 
 }
+
+
+/*
+ * temp failai
+ * controlleriu pataisymas - check
+ * form builderio trukumas - check
+ * validacijos (forma ir modeliai) assert - check
+ * route vardai ir prasmingi routes - check
+ * relations - check
+ * html kodas - check
+ */
