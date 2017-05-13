@@ -1,4 +1,4 @@
-taskmanager
+Task manager
 ===========
 
-A Symfony project created on April 9, 2017, 7:43 pm.
+Task manager is a Symfony framework based tool used for tracing your advancement 
