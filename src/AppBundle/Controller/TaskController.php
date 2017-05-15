@@ -66,14 +66,14 @@ class TaskController extends Controller
                 // $form->getData() holds the submitted values
                 // but, the original `$task` variable has also been updated
                 $em = $this->getDoctrine()->getManager();
-                $task = $form->getData();
+                $taskas = $form->getData();
                 $taskToAdd = new Task();
-                $taskToAdd->setStatus($task['status']);
-                $taskToAdd->setName($task['name']);
-                $taskToAdd->setDescription($task['description']);
-                $taskToAdd->setCategory($task['category']);
-                $taskToAdd->setAuthor($task['author']);
-                $taskToAdd->setCreationDate($task['creation_date']);
+                $taskToAdd->setStatus("New");
+                $taskToAdd->setName($taskas->getName());
+                $taskToAdd->setDescription($taskas->getDescription());
+                $taskToAdd->setCategory($taskas->getCategory());
+                $taskToAdd->setAuthor($this->getUser()->getUsername());
+                $taskToAdd->setCreationDate($taskas->getCreationDate());
 
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($taskToAdd);

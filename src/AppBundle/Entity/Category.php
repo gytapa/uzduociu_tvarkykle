@@ -29,7 +29,6 @@ class Category
     private $name;
     /**
      * @ORM\Column(type="date")
-     * @Assert\Type("date")
      */
     private $creationDate;
 

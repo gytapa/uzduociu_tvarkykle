@@ -69,8 +69,8 @@ class CategoryController extends Controller
                 'form' => $form->createView(),
             ));
         } else {
-            $taskToAdd = new Category();
-            $form = $this->createForm(CategoryType::class, $taskToAdd);
+            $categoryToAdd = new Category();
+            $form = $this->createForm(CategoryType::class, $categoryToAdd);
 
             $form->handleRequest($request);
 
@@ -78,10 +78,11 @@ class CategoryController extends Controller
                 // $form->getData() holds the submitted values
                 // but, the original `$task` variable has also been updated
                 $em = $this->getDoctrine()->getManager();
-                $taskToAdd = $form->getData();
-                $taskToAdd = new Category();
-                $taskToAdd->setName($task['name']);
-                $taskToAdd->setCreationDate($task['creationDate']);
+                $category = $form->getData();
+
+                $categoryToAdd = new Category();
+                $categoryToAdd->setName($category->getName());
+                $categoryToAdd->setCreationDate($category->getCreationDate());
 
 
                 // ... perform some action, such as saving the task to the database
@@ -90,7 +91,7 @@ class CategoryController extends Controller
                 // $em->persist($task);
                 // $em->flush();
                 $em = $this->getDoctrine()->getManager();
-                $em->persist($taskToAdd);
+                $em->persist($categoryToAdd);
                 $em->flush();
 
                 return $this->redirectToRoute('category');

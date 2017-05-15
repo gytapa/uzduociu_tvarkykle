@@ -51,7 +51,7 @@ class Task
     private $author;
     /**
      * @ORM\Column(type="date")
-     * @Assert\Type("date")
+     *
      */
     private $creation_date;
 
