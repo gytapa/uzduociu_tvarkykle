@@ -4,6 +4,8 @@
 <link rel="stylesheet" href="{{ asset('css/login.css') }}" />
 
 
+<head><script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src='https://www.google.com/recaptcha/api.js'></script></head>
 
 <div class="wrapper">
 <form action="{{ path('login') }}" method="post" class="form-signin">
@@ -21,6 +23,7 @@
     #}
 
     <button type="submit" class="btn btn-lg btn-primary btn-block">login</button>
+    <div class="g-recaptcha"data-sitekey="6LfSYCEUAAAAAO3P4akQjAY8DAlSQ1UdWHQe5lIv"></div>
     <a href="/register">Not a user? Register here</a>
     {% if error %}
         <div class="alert alert-danger">
