@@ -26,12 +26,36 @@ class HomeController extends Controller
 
         $repository = $this->getDoctrine()->getRepository('AppBundle:Task');
         $tasks = $repository->findByAuthor($this->getUser()->getUsername());
+        $points = 0;
+        $numberOfTasks = 0;
+
+        foreach($tasks as $task){
+            if($task->getStatus() == "Baigtas" || $task->getStatus() == "baitas" ||
+                $task->getStatus() == "Done" || $task->getStatus() == "done"){
+                $points = $points + 50;
+            }
+            $numberOfTasks++;
+        }
 
         return $this->render(
-            'userpage.html.twig',array('username' => $username = $this->getUser()->getUsername(), 'tasks' => $tasks ));
+            'userpage.html.twig',array('username' => $username = $this->getUser()->getUsername(), 'tasks' => $tasks, 'points' => $points, 'numberOfTasks' => $numberOfTasks ));
         $user->getTasks();
-
     }
+
+//    /**
+//     * @Route("/home", name="homepage")
+//     */
+//    public function showPoints(Request $request)
+//    {
+//        $repository = $this->getDoctrine()->getRepository('AppBundle:Task');
+//        $tasks = $repository->findByAuthor($this->getUser()->getUsername());
+//        $points = 0;
+//        foreach($tasks as $key => $value){
+//            $points += 50;
+//        }
+//
+//        return $this->render('userpage.html.twig', array('points' => $points));
+//    }
 
     /**
      * @Route("/",name="index")

@@ -1,5 +1,15 @@
 @import "bourbon";
 
+#calendar{
+    max-width: 350px;
+    max-height: 350px;
+    margin-left: auto;
+}
+
+#calendar .fc-today{
+    background: yellow;
+}
+
 body {
     background: #eee !important;
 }
