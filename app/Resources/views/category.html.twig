@@ -18,21 +18,21 @@
 </div>
 
 <div role="main" class="main">
-    <table class="table">
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Creation Date</th>
-            <th></th>
-            <th></th>
+    <table class="task">
+        <tr class="task">
+            <th class="task">ID</th>
+            <th class="task">Name</th>
+            <th class="task">Creation Date</th>
+            <th class="task"></th>
+            <th class="task"></th>
         </tr>
         {% for category in categories %}
-            <tr>
-                <td>{{  category.Id }}</td>
-                <td>{{ category.Name }}</td>
-                <td>{{ category.CreationDate|date("m/d/Y") }}</td>
-                <td><a id="myLink" href="/editcat/{{ category.ID }}" > Edit </a></td>
-                <td><a id="myLink" href="/deletecat/{{ category.ID }}" >Delete</a></td>
+            <tr class="task">
+                <td class="task">{{  category.Id }}</td>
+                <td class="task">{{ category.Name }}</td>
+                <td class="task">{{ category.CreationDate|date("m/d/Y") }}</td>
+                <td class="task"><a id="myLink" href="/editcat/{{ category.ID }}" > Edit </a></td>
+                <td class="task"><a id="myLink" href="/deletecat/{{ category.ID }}" >Delete</a></td>
             </tr>
         {% endfor %}
     </table>

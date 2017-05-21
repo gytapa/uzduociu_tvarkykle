@@ -5,6 +5,7 @@
     <title>Task Manager</title>
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/fullcalendar.css') }}" />
 </head>
 <body>
 
@@ -18,37 +19,38 @@
 </div>
 
 <div role="main" class="main">
-    <!--<div id="calendar"></div>//-->
-    <h3>Number of tasks: {{ numberOfTasks }}</h3>
-    <h3>Your points: {{ points }} ({{ points /50 }} task(-s) done)</h3>
-        <table class="table">
-            <tr>
-                <th>ID</th>
-                <th>Status</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Category</th>
-                <th>Author</th>
-                <th>Creation Date</th>
-                <th></th>
-                <th></th>
+        <h4>Number of tasks: {{ numberOfTasks }}</h4>
+        <h5>Your points: {{ points }} ({{ points /50 }} task(-s) finished)</h5>
+    <div id="calendar"></div>
+
+        <table class="task">
+            <tr class="task">
+                <th class="task">ID</th>
+                <th class="task">Status</th>
+                <th class="task">Name</th>
+                <th class="task">Description</th>
+                <th class="task">Category</th>
+                <th class="task">Author</th>
+                <th class="task">Creation Date</th>
+                <th class="task"></th>
+                <th class="task"></th>
 
             </tr>
             {% for task in tasks %}
-                <tr>
-                    <td id>{{ task.Id }}</td>
-                    <td>{{ task.Status }}</td>
-                    <td>{{ task.Name }}</td>
-                    <td>{{ task.Description }}</td>
-                    <td>{{ task.Category }}</td>
-                    <td>{{ task.Author }}</td>
-                    <td>{{ task.CreationDate|date("m/d/Y") }}</td>
-                    <td><a id="myLink" href="/edit/{{ task.ID }}" > Edit </a></td>
-                    <td><a id="myLink" href="/delete/{{ task.ID }}" >Delete</a></td>
+                <tr class="task">
+                    <td class="task">{{ task.Id }}</td>
+                    <td class="task">{{ task.Status }}</td>
+                    <td class="task">{{ task.Name }}</td>
+                    <td class="task">{{ task.Description }}</td>
+                    <td class="task">{{ task.Category }}</td>
+                    <td class="task">{{ task.Author }}</td>
+                    <td class="task">{{ task.CreationDate|date("m/d/Y") }}</td>
+                    <td class="task"><a id="myLink" href="/edit/{{ task.ID }}" > Edit </a></td>
+                    <td class="task"><a id="myLink" href="/delete/{{ task.ID }}" >Delete</a></td>
                     <?php echo 2+2; ?>            </tr>
             {% endfor %}
         </table>
-    </div>
+</div>
     <script src="http://code.jquery.com/jquery.min.js"></script>
     <script src="js/moment.min.js"></script>
     <script src="js/fullcalendar.js"></script>
