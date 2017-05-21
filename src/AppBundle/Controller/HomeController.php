@@ -30,8 +30,7 @@ class HomeController extends Controller
         $numberOfTasks = 0;
 
         foreach($tasks as $task){
-            if($task->getStatus() == "Baigtas" || $task->getStatus() == "baigtas" ||
-                $task->getStatus() == "Done" || $task->getStatus() == "done"){
+            if($task->getStatus() == "Finished"){
                 $points = $points + 50;
             }
             $numberOfTasks++;
