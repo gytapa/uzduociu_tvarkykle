@@ -18,6 +18,9 @@
 </div>
 
 <div role="main" class="main">
+    <!--<div id="calendar"></div>//-->
+    <h3>Number of tasks: {{ numberOfTasks }}</h3>
+    <h3>Your points: {{ points }} ({{ points /50 }} task(-s) done)</h3>
         <table class="table">
             <tr>
                 <th>ID</th>
@@ -46,5 +49,9 @@
             {% endfor %}
         </table>
     </div>
+    <script src="http://code.jquery.com/jquery.min.js"></script>
+    <script src="js/moment.min.js"></script>
+    <script src="js/fullcalendar.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>
