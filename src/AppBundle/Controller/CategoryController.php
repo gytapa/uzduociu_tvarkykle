@@ -65,7 +65,7 @@ class CategoryController extends Controller
                 return $this->redirectToRoute('category');
             }
 
-            return $this->render('taskmanipulation.html.twig', array(
+            return $this->render('newcategory.html.twig', array(
                 'form' => $form->createView(),
             ));
         } else {
@@ -97,7 +97,7 @@ class CategoryController extends Controller
                 return $this->redirectToRoute('category');
             }
 
-            return $this->render('taskmanipulation.html.twig', array(
+            return $this->render('newcategory.html.twig', array(
                 'form' => $form->createView(),
             ));
         }
@@ -115,6 +115,6 @@ class CategoryController extends Controller
         $task = $repository->find($id);
         $em->remove($task);
         $em->flush();
-        return new Response('<html><body>Task removed. ID: ' . $id . '</body></html>');
+        return $this->redirectToRoute('category');
     }
 }

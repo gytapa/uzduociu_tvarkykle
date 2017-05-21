@@ -30,7 +30,7 @@ class HomeController extends Controller
         $numberOfTasks = 0;
 
         foreach($tasks as $task){
-            if($task->getStatus() == "Baigtas" || $task->getStatus() == "baitas" ||
+            if($task->getStatus() == "Baigtas" || $task->getStatus() == "baigtas" ||
                 $task->getStatus() == "Done" || $task->getStatus() == "done"){
                 $points = $points + 50;
             }
@@ -62,7 +62,7 @@ class HomeController extends Controller
      */
     public function indexPage(Request $request)
     {
-        return $this->render('index.html.twig');
+        return $this->render('./security/login.html.twig');
     }
 }
 

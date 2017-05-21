@@ -1,22 +1,41 @@
-<link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" />
-<link rel="stylesheet" href="{{ asset('css/login.css') }}" />
-<div>
-    <h1>List of Task Categories</h1>
-    ><a href="/editcat/{{ 0 }}" > Click Here to add new category </a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Task Manager</title>
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}" />
+</head>
+<body>
+
+<div role="navigation" id="foo" class="nav-collapse">
+    <ul>
+        <li><a href="/home">Home</a></li>
+        <li><a href="/edit/{{ 0 }}">New Task</a></li>
+        <li class="active"><a href="/category">Categories</a></li>
+        <li><a href="/editcat/{{ 0 }}" >New Category</a></li>
+    </ul>
+</div>
+
+<div role="main" class="main">
     <table class="table">
         <tr>
             <th>ID</th>
             <th>Name</th>
             <th>Creation Date</th>
+            <th></th>
+            <th></th>
         </tr>
         {% for category in categories %}
-        <tr>
-            <td>{{  category.Id }}</td>
-            <td>{{ category.Name }}</td>
-            <td>{{ category.CreationDate|date("m/d/Y") }}</td>
-            <td><a id="myLink" href="/editcat/{{ category.ID }}" > Edit </a></td>
-            <td><a id="myLink" href="/deletecat/{{ category.ID }}" >Delete</a></td>
-        </tr>
+            <tr>
+                <td>{{  category.Id }}</td>
+                <td>{{ category.Name }}</td>
+                <td>{{ category.CreationDate|date("m/d/Y") }}</td>
+                <td><a id="myLink" href="/editcat/{{ category.ID }}" > Edit </a></td>
+                <td><a id="myLink" href="/deletecat/{{ category.ID }}" >Delete</a></td>
+            </tr>
         {% endfor %}
     </table>
 </div>
+</body>
+</html>

@@ -51,7 +51,7 @@ class TaskController extends Controller
                 return $this->redirectToRoute('homepage');
             }
 
-            return $this->render('taskmanipulation.html.twig', array(
+            return $this->render('newcategory.html.twig', array(
                 'form' => $form->createView(),
             ));
         }
@@ -82,7 +82,7 @@ class TaskController extends Controller
                 return $this->redirectToRoute('homepage');
             }
 
-            return $this->render('taskmanipulation.html.twig', array(
+            return $this->render('newtask.html.twig', array(
                 'form' => $form->createView(),
             ));
         }

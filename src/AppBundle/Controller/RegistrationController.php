@@ -36,11 +36,10 @@ class RegistrationController extends Controller
             // ... do any other work - like sending them an email, etc
             // maybe set a "flash" success message for the user
 
-            return $this->redirectToRoute('');
+            return $this->render('./security/login.html.twig');
         }
 
-        return $this->render(
-            'security/register.html.twig',
+        return $this->render('security/register.html.twig',
             array('form' => $form->createView())
         );
     }

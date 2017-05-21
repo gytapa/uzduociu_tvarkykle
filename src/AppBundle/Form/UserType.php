@@ -24,8 +24,10 @@ class UserType extends AbstractType
                 'first_options'  => array('label' => 'Password'),
                 'second_options' => array('label' => 'Repeat Password')
             ))
-            ->add('submit', SubmitType::class)
-        ;
+            ->add('submit', SubmitType::class, array(
+                    'label' => 'Register Now',
+                    'attr'  => array('class' => 'form-control btn btn-register'))
+            );
     }
 
     public function configureOptions(OptionsResolver $resolver)
