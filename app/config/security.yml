@@ -25,6 +25,9 @@ security:
                   pattern:    ^/
                   http_basic: ~
                   provider: our_db_provider
+                  logout:
+                    path: /logout
+                    target: /
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
@@ -32,6 +35,7 @@ security:
         default:
             anonymous: ~
             http_basic: ~
+
 
     access_control:
     # require ROLE_ADMIN for /admin*
