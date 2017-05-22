@@ -51,7 +51,7 @@ class TaskController extends Controller
                 return $this->redirectToRoute('homepage');
             }
 
-            return $this->render('newcategory.html.twig', array(
+            return $this->render('newtask.html.twig', array(
                 'form' => $form->createView(),
             ));
         }

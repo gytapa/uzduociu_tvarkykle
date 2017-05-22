@@ -37,7 +37,11 @@ class HomeController extends Controller
         }
 
         return $this->render(
-            'userpage.html.twig',array('username' => $username = $this->getUser()->getUsername(), 'tasks' => $tasks, 'points' => $points, 'numberOfTasks' => $numberOfTasks ));
+            'userpage.html.twig',array(
+                'username' => $username = $this->getUser()->getUsername(),
+                'tasks' => $tasks, 'points' => $points,
+                'numberOfTasks' => $numberOfTasks
+            ));
         $user->getTasks();
     }
 
