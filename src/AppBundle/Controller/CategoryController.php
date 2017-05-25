@@ -62,6 +62,7 @@ class CategoryController extends Controller
                 // $em->flush();
 
                 $em->flush();
+                $this->addFlash('success', 'Category has been <a href="/" class="alert-link">edited!</a>');
                 return $this->redirectToRoute('category');
             }
 
@@ -93,7 +94,7 @@ class CategoryController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($categoryToAdd);
                 $em->flush();
-
+                $this->addFlash('success', 'Category has been <a href="/" class="alert-link">added!</a>');
                 return $this->redirectToRoute('category');
             }
 
@@ -115,6 +116,7 @@ class CategoryController extends Controller
         $task = $repository->find($id);
         $em->remove($task);
         $em->flush();
+        $this->addFlash('success', 'Category has been <a href="/" class="alert-link">removed!</a>');
         return $this->redirectToRoute('category');
     }
 }
