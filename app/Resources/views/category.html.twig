@@ -151,7 +151,7 @@
                                     <thead class="text-primary">
                                     <th>ID</th>
                                     <th>Name</th>
-                                    <th>Creation Date</th>
+                                    <th>Deadline Date</th>
                                     <th></th>
                                     <th></th>
                                     </thead>
@@ -160,7 +160,7 @@
                                         <tr>
                                             <td>{{  category.Id }}</td>
                                             <td>{{ category.Name }}</td>
-                                            <td>{{ category.CreationDate|date("m/d/Y") }}</td>
+                                            <td>{{ category.DeadlineDate|date("m/d/Y") }}</td>
                                             <td><a id="myLink" href="/editcat/{{ category.ID }}" > Edit </a></td>
                                             <td><a id="myLink" href="/deletecat/{{ category.ID }}" >Delete</a></td>
                                             <?php echo 2+2; ?>            </tr></tbody>

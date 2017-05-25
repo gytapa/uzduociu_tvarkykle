@@ -73,7 +73,6 @@ class TaskController extends Controller
                 $taskToAdd->setDescription($taskas->getDescription());
                 $taskToAdd->setCategory($taskas->getCategory());
                 $taskToAdd->setAuthor($this->getUser()->getUsername());
-                $taskToAdd->setCreationDate($taskas->getCreationDate());
                 $taskToAdd->setDeadlineDate($taskas->getDeadlineDate());
 
                 $em = $this->getDoctrine()->getManager();

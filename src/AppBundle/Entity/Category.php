@@ -30,7 +30,7 @@ class Category
     /**
      * @ORM\Column(type="date")
      */
-    private $creationDate;
+    private $deadlineDate;
 
 
     /**
@@ -74,9 +74,9 @@ class Category
      *
      * @return Category
      */
-    public function setCreationDate($creationDate)
+    public function setDeadlineDate($deadlineDate)
     {
-        $this->creationDate = $creationDate;
+        $this->deadlineDate = $deadlineDate;
 
         return $this;
     }
@@ -86,8 +86,8 @@ class Category
      *
      * @return \DateTime
      */
-    public function getCreationDate()
+    public function getDeadlineDate()
     {
-        return $this->creationDate;
+        return $this->deadlineDate;
     }
 }

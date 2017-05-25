@@ -54,7 +54,6 @@ class TaskController extends Controller
                     'disabled' => true,
                     'data' => $this->getUser()->getUsername()
                 ))
-                ->add('creation_date', DateType::class)
                 ->add('deadline_date', DateType::class)
                 ->add('save', SubmitType::class, array('label' => 'Apply Changes'))
                 ->getForm();
@@ -86,7 +85,6 @@ class TaskController extends Controller
                     'disabled' => true,
                     'data' => $this->getUser()->getUsername()
                 ))
-                ->add('creation_date', DateType::class)
                 ->add('deadline_date', DateType::class)
                 ->add('save', SubmitType::class, array('label' => 'Apply Changes'))
                 ->getForm();
@@ -104,7 +102,6 @@ class TaskController extends Controller
                 $taskToAdd->setDescription($task['description']);
                 $taskToAdd->setCategory($task['category']);
                 $taskToAdd->setAuthor($task['author']);
-                $taskToAdd->setCreationDate($task['creation_date']);
                 $taskToAdd->setDeadlineDate($task['deadline_date']);
 
 
