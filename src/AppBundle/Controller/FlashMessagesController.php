@@ -17,7 +17,7 @@ class FlashMessagesController extends Controller
      */
     public function flashMessages()
     {
-        $this->addFlash('success', 'Task has been <a href="/" class="alert-link">removed!</a>');
+         //$this->addFlash('success', 'Task has been <a href="/" class="alert-link">removed!</a>');
 //        $this->addFlash('info', 'some <a href="/" class="alert-link">important info</a>.');
 //        $this->addFlash('warning', 'uh oh, that didn\'t quite <a href="/" class="alert-link">work right</a>');
 //        $this->addFlash('danger', 'danger <a href="/" class="alert-link">Will Robinson!</a>');

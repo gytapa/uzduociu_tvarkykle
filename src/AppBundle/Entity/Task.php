@@ -54,6 +54,7 @@ class Task
      *
      */
     private $creation_date;
+    private $deadline_date;
 
     /**
      * Get id
@@ -198,6 +199,19 @@ class Task
 
         return $this;
     }
+    /**
+     * Set setDeadlineDate
+     *
+     * @param \DateTime $deadlineDate
+     *
+     * @return Task
+     */
+    public function setDeadlineDate($deadlineDate)
+    {
+        $this->deadline_date = $deadlineDate;
+
+        return $this;
+    }
 
     /**
      * Get creationDate
@@ -208,6 +222,14 @@ class Task
     {
         return $this->creation_date;
     }
-
+    /**
+     * Get deadlineDate
+     *
+     * @return \DateTime
+     */
+    public function getDeadlineDate()
+    {
+        return $this->deadline_date;
+    }
 
 }
