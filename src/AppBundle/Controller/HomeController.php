@@ -23,18 +23,11 @@ class HomeController extends Controller
      */
     public function succesfulLogin(Request $request)
     {
-
         $repository = $this->getDoctrine()->getRepository('AppBundle:Task');
         $tasks = $repository->findByAuthor($this->getUser()->getUsername());
-        $points = 0;
-        $numberOfTasks = 0;
+        $points = $this->getPoints($tasks);
 
-        foreach($tasks as $task){
-            if($task->getStatus() == "Finished"){
-                $points = $points + 50;
-            }
-            $numberOfTasks++;
-        }
+        $numberOfTasks = count($tasks);
 
         return $this->render(
             'userpage.html.twig',array(
@@ -45,20 +38,84 @@ class HomeController extends Controller
         $user->getTasks();
     }
 
-//    /**
-//     * @Route("/home", name="homepage")
-//     */
-//    public function showPoints(Request $request)
-//    {
-//        $repository = $this->getDoctrine()->getRepository('AppBundle:Task');
-//        $tasks = $repository->findByAuthor($this->getUser()->getUsername());
-//        $points = 0;
-//        foreach($tasks as $key => $value){
-//            $points += 50;
-//        }
-//
-//        return $this->render('userpage.html.twig', array('points' => $points));
-//    }
+    /**
+     * @Route("/home/new",name="new")
+     */
+    public function newTasks(Request $request)
+    {
+        $repository = $this->getDoctrine()->getRepository('AppBundle:Task');
+        $tasks = $repository->findByAuthor($this->getUser()->getUsername());
+        $points = $this->getPoints($tasks);
+        $numberOfTasks = count($tasks);
+        $newTask = array();
+
+        foreach ($tasks as $task)
+        {
+            if($task->getStatus() == "New"){
+                $newTask[] = $task;
+            }
+        }
+
+        return $this->render(
+            'userpage.html.twig',array(
+            'username' => $username = $this->getUser()->getUsername(),
+            'tasks' => $newTask, 'points' => $points,
+            'numberOfTasks' => $numberOfTasks
+        ));
+    }
+
+    /**
+     * @Route("/home/inprogress",name="inprogress")
+     */
+    public function inProgressTasks(Request $request)
+    {
+        $repository = $this->getDoctrine()->getRepository('AppBundle:Task');
+        $tasks = $repository->findByAuthor($this->getUser()->getUsername());
+        $points = $this->getPoints($tasks);
+        $numberOfTasks = count($tasks);
+        $newTask = array();
+
+        foreach ($tasks as $task)
+        {
+            if($task->getStatus() == "In Progress"){
+                $newTask[] = $task;
+            }
+        }
+
+        return $this->render(
+            'userpage.html.twig',array(
+            'username' => $username = $this->getUser()->getUsername(),
+            'tasks' => $newTask, 'points' => $points,
+            'numberOfTasks' => $numberOfTasks
+        ));
+    }
+
+    /**
+     * @Route("/home/finished",name="finished")
+     */
+    public function finishedTasks(Request $request)
+    {
+        $repository = $this->getDoctrine()->getRepository('AppBundle:Task');
+        $tasks = $repository->findByAuthor($this->getUser()->getUsername());
+        $points = $this->getPoints($tasks);
+        $numberOfTasks = count($tasks);
+        $newTask = array();
+
+        foreach ($tasks as $task)
+        {
+            if($task->getStatus() == "Finished"){
+                $newTask[] = $task;
+            }
+        }
+
+        return $this->render(
+            'userpage.html.twig',array(
+            'username' => $username = $this->getUser()->getUsername(),
+            'tasks' => $newTask, 'points' => $points,
+            'numberOfTasks' => $numberOfTasks
+        ));
+    }
+
 
     /**
      * @Route("/",name="index")
@@ -66,6 +123,19 @@ class HomeController extends Controller
     public function indexPage(Request $request)
     {
         return $this->render('./security/login.html.twig');
+    }
+
+    private function getPoints($tasks)
+    {
+        $points = 0;
+        foreach($tasks as $task)
+        {
+            if($task->getStatus() == "Finished")
+            {
+                $points+=50;
+            }
+        }
+        return $points;
     }
 }
 

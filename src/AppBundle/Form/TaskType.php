@@ -37,6 +37,7 @@ class TaskType extends AbstractType
                     'attr' => ['class' => 'klase']
                 ))
                 ->add('creation_date', DateType::class)
+                ->add('deadline_date', DateType::class)
                 ->add('save', SubmitType::class, array('label' => 'Apply Changes'));
         }
         else
@@ -55,6 +56,7 @@ class TaskType extends AbstractType
                     'attr' => ['class' => 'klase']
                 ))
                 ->add('creation_date', DateType::class)
+                ->add('deadline_date', DateType::class)
                 ->add('save', SubmitType::class, array('label' => 'Apply Changes'));
         }
     }

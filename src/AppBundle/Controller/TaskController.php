@@ -18,7 +18,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class TaskController extends Controller
 {
-
     /**
      * @Route("/edit/{id}",name="editTask")
      *
@@ -49,10 +48,9 @@ class TaskController extends Controller
 
             if ($form->isSubmitted() && $form->isValid()) {
                 $em->flush();
-                $this->addFlash('success', 'Task has been <a href="/" class="alert-link">edited!</a>');
                 return $this->redirectToRoute('homepage');
             }
-
+            $this->addFlash('success', 'Task has been <a href="/" class="alert-link">edited!</a>');
             return $this->render('newtask.html.twig', array(
                 'form' => $form->createView(),
             ));
@@ -76,14 +74,15 @@ class TaskController extends Controller
                 $taskToAdd->setCategory($taskas->getCategory());
                 $taskToAdd->setAuthor($this->getUser()->getUsername());
                 $taskToAdd->setCreationDate($taskas->getCreationDate());
+                $taskToAdd->setDeadlineDate($taskas->getDeadlineDate());
 
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($taskToAdd);
                 $em->flush();
                 $this->addFlash('success', 'Task has been <a href="/" class="alert-link">added!</a>');
                 return $this->redirectToRoute('homepage');
-
             }
+
             return $this->render('newtask.html.twig', array(
                 'form' => $form->createView(),
             ));
@@ -102,9 +101,8 @@ class TaskController extends Controller
         $task = $repository->find($id);
         $em->remove($task);
         $em->flush();
-        $this->addFlash('success', 'Task has been <a href="/" class="alert-link">removed!</a>');
-	 return $this->redirectToRoute('homepage');
-
+         $this->addFlash('success', 'Task has been <a href="/" class="alert-link">removed!</a>');
+        return $this->redirectToRoute('homepage');
     }
 
 }
