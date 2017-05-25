@@ -106,6 +106,7 @@
     </div>
 
     <div class="main-panel">
+        {% set counter = 1  %}
         <nav class="navbar navbar-transparent navbar-absolute">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -168,7 +169,8 @@
                         {% for task in tasks %}
                         <tbody>
                         <tr>
-                                <td>{{ task.Id }}</td>
+                                <td>{{ counter }}</td>
+                                {% set counter = counter + 1 %}
                                 <td>{{ task.Status }}</td>
                                 <td>{{ task.Name }}</td>
                                 <td>{{ task.Description }}</td>
