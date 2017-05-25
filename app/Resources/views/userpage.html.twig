@@ -66,6 +66,7 @@
         <div class="logo">
             <a href="/home" class="simple-text">
                 Task Manager
+                <h6>Current time: {{ "now"|date(" d/m/Y") }}</h6>
             </a>
         </div>
 
@@ -152,6 +153,7 @@
                     <div class="card-content table-responsive">
                         <h4>Number of tasks: {{ numberOfTasks }}</h4>
                         <h5>Your points: {{ points }} ({{ points /50 }} task(-s) finished)</h5>
+
                         <a href="/home">All</a><a> | </a><a href="/home/new">New</a><a> | </a><a href="/home/inprogress">In progress</a><a> | </a><a href="/home/finished">Finished</a>
                     <table class="table">
                         <thead class="text-primary">
@@ -162,6 +164,7 @@
                             <th>Category</th>
                             <th>Author</th>
                             <th>Deadline Date</th>
+                            <th>Out of date?</th>
                             <th></th>
                             <th></th>
 
@@ -177,6 +180,11 @@
                                 <td>{{ task.Category }}</td>
                                 <td>{{ task.Author }}</td>
                                 <td>{{ task.DeadlineDate|date("m/d/Y") }}</td>
+                            {% if task.DeadlineDate|date("U") < "now"|date("U")  %}
+                                <td>Yes</td>
+                                {% else %}
+                                <td>No</td>
+                            {% endif %}
                                 <td><a id="myLink" href="/edit/{{ task.ID }}" > Edit </a></td>
                                 <td><a id="myLink" href="/delete/{{ task.ID }}" >Delete</a></td>
                             <?php echo 2+2; ?>            </tr></tbody>
