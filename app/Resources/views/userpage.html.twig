@@ -66,7 +66,6 @@
         <div class="logo">
             <a href="/home" class="simple-text">
                 Task Manager
-                <h6>Today is: {{ "now"|date(" d/m/Y") }}</h6>
             </a>
         </div>
 
@@ -131,7 +130,7 @@
 
                     <form class="navbar-form navbar-right" role="search">
                         <div class="form-group  is-empty">
-                            <input type="text" class="form-control" placeholder="Search" name ="search">
+                            <input type="text" class="form-control" placeholder="Search">
                             <span class="material-input"></span>
                         </div>
                         <button type="submit" class="btn btn-white btn-round btn-just-icon">
@@ -152,8 +151,11 @@
                             </div>
                     <div class="card-content table-responsive">
                         <h4>Number of tasks: {{ numberOfTasks }}</h4>
-                        <h5>Your points: {{ points }} ({{ points /50 }} task(-s) finished ({{ (points/numberOfTasks*2)|number_format(2) }} %))! </h5>
-                        <a href="/home">All</a><a> | </a><a href="/home/new">New</a><a> | </a><a href="/home/inprogress">In progress</a><a> | </a><a href="/home/finished">Finished</a> | </a><a href="/home/endsToday">Ends Today</a>
+                        <h5>Your points: {{ points }} ({{ points /50 }} task(-s) finished)</h5>
+                        <div align="right">
+                            <a href="/home">All</a><a> | </a><a href="/home/new">New</a><a> | </a><a href="/home/inprogress">In progress</a><a> | </a><a href="/home/finished">Finished</a>
+                        </div>
+
                     <table class="table">
                         <thead class="text-primary">
                             <th>ID</th>
@@ -162,8 +164,8 @@
                             <th>Description</th>
                             <th>Category</th>
                             <th>Author</th>
+                            <th>Creation Date</th>
                             <th>Deadline Date</th>
-                            <th>Out of date?</th>
                             <th></th>
                             <th></th>
 
@@ -178,15 +180,13 @@
                                 <td>{{ task.Description }}</td>
                                 <td>{{ task.Category }}</td>
                                 <td>{{ task.Author }}</td>
+                                <td>{{ task.CreationDate|date("m/d/Y") }}</td>
                                 <td>{{ task.DeadlineDate|date("m/d/Y") }}</td>
-                            {% if task.DeadlineDate|date("U") < "now"|date("U")  %}
-                                <td>Yes</td>
-                                {% else %}
-                                <td>No</td>
-                            {% endif %}
                                 <td><a id="myLink" href="/edit/{{ task.ID }}" > Edit </a></td>
                                 <td><a id="myLink" href="/delete/{{ task.ID }}" >Delete</a></td>
-                            <?php echo 2+2; ?>            </tr></tbody>
+                            <?php echo 2+2; ?>
+                        </tr>
+                        </tbody>
                         {% endfor %}
                     </table>
                     </div>
