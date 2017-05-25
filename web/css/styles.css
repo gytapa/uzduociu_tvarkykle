@@ -299,8 +299,3 @@ a:hover {
   .main { width: auto; left: 18em }
 }
 
-#calendar{
-    max-width: 180px;
-    max-height: 180px;
-    margin-right:auto;
-}

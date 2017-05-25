@@ -62,6 +62,12 @@
                         <p>Configure Categories</p>
                     </a>
                 </li>
+                <li>
+                    <a href="/calendar">
+                        <i class="material-icons">description</i>
+                        <p>Calendar</p>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
@@ -110,6 +116,8 @@
                                 <h4 class="title">Tasks</h4>
                             </div>
                     <div class="card-content table-responsive">
+                        <h4>Number of tasks: {{ numberOfTasks }}</h4>
+                        <h5>Your points: {{ points }} ({{ points /50 }} task(-s) finished)</h5>
                     <table class="table">
                         <thead class="text-primary">
                             <th>ID</th>

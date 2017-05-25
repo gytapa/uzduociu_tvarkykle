@@ -1,14 +1,14 @@
 @import "bourbon";
 
-#calendar{
-    max-width: 350px;
-    max-height: 350px;
-    margin-left: auto;
-}
+/*#calendar{*/
+    /*max-width: 350px;*/
+    /*max-height: 350px;*/
+    /*margin-left: auto;*/
+/*}*/
 
-#calendar .fc-today{
-    background: yellow;
-}
+/*#calendar .fc-today{*/
+    /*background: yellow;*/
+/*}*/
 
 body {
     background: #eee !important;
@@ -24,7 +24,7 @@ body {
     padding: 15px 35px 45px;
     margin: 0 auto;
     background-color: #fff;
-    border: 1px solid rgba(0,0,0,0.1);
+    border: 1px solid rgba(0,0,0,0.1);}
 
 .form-signin-heading,
 .checkbox {

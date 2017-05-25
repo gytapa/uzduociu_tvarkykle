@@ -2404,6 +2404,7 @@ fieldset[disabled] .form-group.is-focused .checkbox label {
   top: 3px;
   padding-right: 5px;
 }
+
 .checkbox .checkbox-material:before {
   display: block;
   position: absolute;
@@ -5063,4 +5064,17 @@ footer .btn {
     margin-left: -20px;
     margin-right: -20px;
   }
+}
+
+#calendar{
+  max-width: 900px;
+  margin: auto;
+}
+
+#calendar .fc-today{
+  background: #ccc;
+}
+
+#calendar .fc-day:hover{
+  background: #ccc;
 }

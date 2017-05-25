@@ -45,20 +45,6 @@ class HomeController extends Controller
         $user->getTasks();
     }
 
-//    /**
-//     * @Route("/home", name="homepage")
-//     */
-//    public function showPoints(Request $request)
-//    {
-//        $repository = $this->getDoctrine()->getRepository('AppBundle:Task');
-//        $tasks = $repository->findByAuthor($this->getUser()->getUsername());
-//        $points = 0;
-//        foreach($tasks as $key => $value){
-//            $points += 50;
-//        }
-//
-//        return $this->render('userpage.html.twig', array('points' => $points));
-//    }
 
     /**
      * @Route("/",name="index")
