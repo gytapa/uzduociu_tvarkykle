@@ -36,6 +36,8 @@ class HomeController extends Controller
                 'numberOfTasks' => $numberOfTasks
             ));
         $user->getTasks();
+
+        return $this->render('userpage.html.twig');
     }
 
     /**
@@ -90,6 +92,31 @@ class HomeController extends Controller
         ));
     }
 
+    /**
+     * @Route("/home/endsToday",name="Ends Today")
+     */
+    public function endsToday(Request $request)
+    {
+        $repository = $this->getDoctrine()->getRepository('AppBundle:Task');
+        $tasks = $repository->findByAuthor($this->getUser()->getUsername());
+        $points = $this->getPoints($tasks);
+        $numberOfTasks = count($tasks);
+        $newTask = array();
+
+        foreach ($tasks as $task)
+        {
+            if($task->getDeadlineDate() == "now"|date("Y-m-d")){
+                $newTask[] = $task;
+            }
+        }
+
+        return $this->render(
+            'userpage.html.twig',array(
+            'username' => $username = $this->getUser()->getUsername(),
+            'tasks' => $newTask, 'points' => $points,
+            'numberOfTasks' => $numberOfTasks
+        ));
+    }
     /**
      * @Route("/home/finished",name="finished")
      */

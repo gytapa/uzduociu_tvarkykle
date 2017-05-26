@@ -83,7 +83,7 @@ class CategoryController extends Controller
 
                 $categoryToAdd = new Category();
                 $categoryToAdd->setName($category->getName());
-                $categoryToAdd->setCreationDate($category->getCreationDate());
+                $categoryToAdd->setDeadlineDate($category->getDeadlineDate());
 
 
                 // ... perform some action, such as saving the task to the database

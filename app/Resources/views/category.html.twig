@@ -8,26 +8,6 @@
 </head>
 
 <body>
-<div class="container">
-
-    <div class="row">
-        <div class="col-sm-12">
-            {% include ('::flashmessages.html.twig') %}
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-12">
-            {% block body %}
-            {% endblock %}
-        </div>
-    </div>
-
-</div><!-- /.container -->
-
-{% block javascripts %}
-
-{% endblock %}
 </body>
 <head>
     <meta charset="utf-8" />
@@ -64,6 +44,7 @@
         <div class="logo">
             <a href="/home" class="simple-text">
                 Task Manager
+                <h6>Today is: {{ "now"|date(" d/m/Y") }}</h6>
             </a>
         </div>
 
@@ -151,7 +132,7 @@
                                     <thead class="text-primary">
                                     <th>ID</th>
                                     <th>Name</th>
-                                    <th>Creation Date</th>
+                                    <th>Deadline Date</th>
                                     <th></th>
                                     <th></th>
                                     </thead>
@@ -160,7 +141,7 @@
                                         <tr>
                                             <td>{{  category.Id }}</td>
                                             <td>{{ category.Name }}</td>
-                                            <td>{{ category.CreationDate|date("m/d/Y") }}</td>
+                                            <td>{{ category.DeadlineDate|date("m/d/Y") }}</td>
                                             <td><a id="myLink" href="/editcat/{{ category.ID }}" > Edit </a></td>
                                             <td><a id="myLink" href="/deletecat/{{ category.ID }}" >Delete</a></td>
                                             <?php echo 2+2; ?>            </tr></tbody>

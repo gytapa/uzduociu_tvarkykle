@@ -53,7 +53,6 @@ class Task
      * @ORM\Column(type="date")
      *
      */
-    private $creation_date;
     private $deadline_date;
 
     /**
@@ -187,19 +186,6 @@ class Task
     }
 
     /**
-     * Set creationDate
-     *
-     * @param \DateTime $creationDate
-     *
-     * @return Task
-     */
-    public function setCreationDate($creationDate)
-    {
-        $this->creation_date = $creationDate;
-
-        return $this;
-    }
-    /**
      * Set setDeadlineDate
      *
      * @param \DateTime $deadlineDate
@@ -213,15 +199,6 @@ class Task
         return $this;
     }
 
-    /**
-     * Get creationDate
-     *
-     * @return \DateTime
-     */
-    public function getCreationDate()
-    {
-        return $this->creation_date;
-    }
     /**
      * Get deadlineDate
      *

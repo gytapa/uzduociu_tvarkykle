@@ -28,7 +28,7 @@ class CalendarController extends Controller
         $data = '[';
 
         foreach($tasks as $task){
-            $data .= '{"start": "'.$task->getCreationDate()->format('Y-m-d') . '", "title": "' . $task->getName() . '" },';
+            $data .= '{"start": "'.$task->getDeadlineDate()->format('Y-m-d') . '", "title": "' . $task->getName() . '" },';
         }
 
         $newData = rtrim($data, ",");

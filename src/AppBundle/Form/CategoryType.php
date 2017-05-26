@@ -15,7 +15,7 @@ class CategoryType extends AbstractType
     {
         $builder
             ->add('name', TextType::class)
-            ->add('creationDate', DateType::class)
+            ->add('deadlineDate', DateType::class)
             ->add('save', SubmitType::class, array('label' => 'Apply Changes'));
     }
 

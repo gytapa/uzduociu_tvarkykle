@@ -50,7 +50,6 @@ class TaskController extends Controller
                 $em->flush();
                 return $this->redirectToRoute('homepage');
             }
-            $this->addFlash('success', 'Task has been <a href="/" class="alert-link">edited!</a>');
             return $this->render('newtask.html.twig', array(
                 'form' => $form->createView(),
             ));
@@ -73,13 +72,11 @@ class TaskController extends Controller
                 $taskToAdd->setDescription($taskas->getDescription());
                 $taskToAdd->setCategory($taskas->getCategory());
                 $taskToAdd->setAuthor($this->getUser()->getUsername());
-                $taskToAdd->setCreationDate($taskas->getCreationDate());
                 $taskToAdd->setDeadlineDate($taskas->getDeadlineDate());
 
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($taskToAdd);
                 $em->flush();
-                $this->addFlash('success', 'Task has been <a href="/" class="alert-link">added!</a>');
                 return $this->redirectToRoute('homepage');
             }
 
@@ -101,19 +98,7 @@ class TaskController extends Controller
         $task = $repository->find($id);
         $em->remove($task);
         $em->flush();
-         $this->addFlash('success', 'Task has been <a href="/" class="alert-link">removed!</a>');
         return $this->redirectToRoute('homepage');
     }
 
 }
-
-
-/*
- * temp failai
- * controlleriu pataisymas - check
- * form builderio trukumas - check
- * validacijos (forma ir modeliai) assert - check
- * route vardai ir prasmingi routes - check
- * relations - check
- * html kodas - check
- */
