@@ -36,6 +36,8 @@ class HomeController extends Controller
                 'numberOfTasks' => $numberOfTasks
             ));
         $user->getTasks();
+
+        return $this->render('userpage.html.twig');
     }
 
     /**

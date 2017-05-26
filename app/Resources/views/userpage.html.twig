@@ -7,30 +7,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 </head>
 
-<body>
-<div class="container">
-
-    <div class="row">
-        <div class="col-sm-12">
-            {% include ('::flashmessages.html.twig') %}
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-12">
-            {% block body %}
-            {% endblock %}
-        </div>
-    </div>
-
-</div><!-- /.container -->
-
-{% block javascripts %}
-
-{% endblock %}
-</body>
-<head>
-
     <meta charset="utf-8" />
     <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('img/apple-icon.png') }}" />
     <link rel="icon" type="image/png" href="{{ asset('img/favicon.png') }}"/>
@@ -52,7 +28,6 @@
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
 
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
-    {#<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">#}
 <body>
 
 
@@ -66,6 +41,7 @@
         <div class="logo">
             <a href="/home" class="simple-text">
                 Task Manager
+                <h6>Today is: {{ "now"|date(" d/m/Y") }}</h6>
             </a>
         </div>
 
@@ -130,7 +106,7 @@
 
                     <form class="navbar-form navbar-right" role="search">
                         <div class="form-group  is-empty">
-                            <input type="text" class="form-control" placeholder="Search">
+                            <input type="text" class="form-control" placeholder="Search" name ="search">
                             <span class="material-input"></span>
                         </div>
                         <button type="submit" class="btn btn-white btn-round btn-just-icon">
@@ -151,11 +127,13 @@
                             </div>
                     <div class="card-content table-responsive">
                         <h4>Number of tasks: {{ numberOfTasks }}</h4>
-                        <h5>Your points: {{ points }} ({{ points /50 }} task(-s) finished)</h5>
-                        <div align="right">
-                            <a href="/home">All</a><a> | </a><a href="/home/new">New</a><a> | </a><a href="/home/inprogress">In progress</a><a> | </a><a href="/home/finished">Finished</a>
-                        </div>
-
+                        <h5>Your points: {{ points }} ({{ points /50 }} task(-s) finished ({{ (points/numberOfTasks*2)|number_format(2) }} %))! </h5>
+                            <ul class="list-inline pull-right sort">
+                                <li><a class="btn" href="/home">All</a></li>
+                                <li><a class="btn" href="/home/new">New</a></li>
+                                <li><a class="btn" href="/home/inprogress">In progress</a></li>
+                                <li><a class="btn" href="/home/finished">Finished</a></li>
+                            </ul>
                     <table class="table">
                         <thead class="text-primary">
                             <th>ID</th>
@@ -164,8 +142,8 @@
                             <th>Description</th>
                             <th>Category</th>
                             <th>Author</th>
-                            <th>Creation Date</th>
                             <th>Deadline Date</th>
+                            <th>Out of date?</th>
                             <th></th>
                             <th></th>
 
@@ -180,13 +158,15 @@
                                 <td>{{ task.Description }}</td>
                                 <td>{{ task.Category }}</td>
                                 <td>{{ task.Author }}</td>
-                                <td>{{ task.CreationDate|date("m/d/Y") }}</td>
                                 <td>{{ task.DeadlineDate|date("m/d/Y") }}</td>
+                            {% if task.DeadlineDate|date("U") < "now"|date("U")  %}
+                                <td>Yes</td>
+                                {% else %}
+                                <td>No</td>
+                            {% endif %}
                                 <td><a id="myLink" href="/edit/{{ task.ID }}" > Edit </a></td>
                                 <td><a id="myLink" href="/delete/{{ task.ID }}" >Delete</a></td>
-                            <?php echo 2+2; ?>
-                        </tr>
-                        </tbody>
+                            <?php echo 2+2; ?>            </tr></tbody>
                         {% endfor %}
                     </table>
                     </div>
@@ -199,6 +179,8 @@
 </div>
 
 </body>
+
+<script src="{{ asset('js/sort.js') }}"></script>
 
 <!--   Core JS Files   -->
 <script src="{{ asset('js/jquery-3.1.0.min.js') }}" type="text/javascript"></script>
