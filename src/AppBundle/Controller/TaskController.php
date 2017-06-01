@@ -33,6 +33,7 @@ class TaskController extends Controller
             $name = $cat->getName();
             $categories["$name"] = $name;
         }
+
         if ($id > 0 ) {
             $repository = $this->getDoctrine()
                 ->getRepository('AppBundle:Task');
