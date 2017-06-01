@@ -143,11 +143,11 @@
                     <table class="table">
                         <thead class="text-primary">
                             <th>ID</th>
-                            <th>Status</th>
-                            <th>Name</th>
-                            <th>Description</th>
-                            <th>Category</th>
-                            <th>Author</th>
+                            <th>{{ knp_pagination_sortable(tasks, 'Status', 'task.Status') }}</th>
+                            <th>{{ knp_pagination_sortable(tasks, 'Name', 'task.Name') }}</th>
+                            <th>{{ knp_pagination_sortable(tasks, 'Description', 'task.Description') }}</th>
+                            <th>{{ knp_pagination_sortable(tasks, 'Category', 'task.Category') }}</th>
+                            <th>{{ knp_pagination_sortable(tasks, 'Author', 'task.Author') }}</th>
                             <th>Deadline Date</th>
                             <th>Out of date?</th>
                             <th></th>
@@ -175,6 +175,9 @@
                             <?php echo 2+2; ?>            </tr></tbody>
                         {% endfor %}
                     </table>
+
+                        <div class="navigation text-center">
+                        {{ knp_pagination_render(tasks) }}</div>
                     </div>
                         </div>
                     </div>

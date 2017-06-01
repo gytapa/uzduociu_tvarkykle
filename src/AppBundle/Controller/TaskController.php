@@ -25,8 +25,9 @@ class TaskController extends Controller
     public function editAction(Request $request, $id)
     {
         $category = $this->getDoctrine()->getManager();
-        $products = $category->getRepository('AppBundle:Category')
-            ->findAll();
+        $products = $category->getRepository('AppBundle:Category')->findAll();
+
+
         $categories = array();
         foreach($products as $cat)
         {

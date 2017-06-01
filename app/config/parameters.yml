@@ -1,8 +1,8 @@
 # This file is auto-generated during the composer install
 parameters:
-    database_host:     localhost
-    database_name:     test_project
-    database_user:     root
+    database_host: localhost
+    database_name: test_project
+    database_user: root
     database_password: 123123
     database_port: 8000
     mailer_transport: smtp

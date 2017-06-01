@@ -23,16 +23,37 @@ class HomeController extends Controller
      */
     public function succesfulLogin(Request $request)
     {
-        $repository = $this->getDoctrine()->getRepository('AppBundle:Task');
-        $tasks = $repository->findByAuthor($this->getUser()->getUsername());
-        $points = $this->getPoints($tasks);
+        $em = $this->getDoctrine()->getManager();
+//        $repository = $em->getRepository('AppBundle:Task');
 
+        $queryBuilder = $em->getRepository('AppBundle:Task')->createQueryBuilder('task');
+
+       if ($request->query->getAlnum('search')){
+           $queryBuilder
+               ->where('task.name LIKE :name')
+            ->setParameter('name', '%' . $request->query->getAlnum('search') . '%');
+       }
+        $repository = $queryBuilder->getQuery();
+
+    $tasks = $repository;
+//->findByAuthor($this->getUser()->getUsername());
+        $points = $this->getPoints($tasks);
         $numberOfTasks = count($tasks);
+
+        /**
+         * @var $paginator \Knp\Component\Pager\Paginator
+         */
+        $paginator = $this->get('knp_paginator');
+        $result = $paginator->paginate(
+            $tasks,
+            $request->query->getInt('page', 1),
+            $request->query->getInt('limit', 10)
+        );
 
         return $this->render(
             'userpage.html.twig',array(
                 'username' => $username = $this->getUser()->getUsername(),
-                'tasks' => $tasks, 'points' => $points,
+                'tasks' => $result, 'points' => $points,
                 'numberOfTasks' => $numberOfTasks
             ));
         $user->getTasks();
@@ -51,6 +72,7 @@ class HomeController extends Controller
         $numberOfTasks = count($tasks);
         $newTask = array();
 
+
         foreach ($tasks as $task)
         {
             if($task->getStatus() == "New"){
@@ -58,10 +80,20 @@ class HomeController extends Controller
             }
         }
 
+        /**
+         * @var $paginator \Knp\Component\Pager\Paginator
+         */
+        $paginator = $this->get('knp_paginator');
+        $result = $paginator->paginate(
+            $newTask,
+            $request->query->getInt('page', 1),
+            $request->query->getInt('limit', 10)
+        );
+
         return $this->render(
             'userpage.html.twig',array(
             'username' => $username = $this->getUser()->getUsername(),
-            'tasks' => $newTask, 'points' => $points,
+            'tasks' => $result, 'points' => $points,
             'numberOfTasks' => $numberOfTasks
         ));
     }
@@ -84,39 +116,24 @@ class HomeController extends Controller
             }
         }
 
-        return $this->render(
-            'userpage.html.twig',array(
-            'username' => $username = $this->getUser()->getUsername(),
-            'tasks' => $newTask, 'points' => $points,
-            'numberOfTasks' => $numberOfTasks
-        ));
-    }
-
-    /**
-     * @Route("/home/endsToday",name="Ends Today")
-     */
-    public function endsToday(Request $request)
-    {
-        $repository = $this->getDoctrine()->getRepository('AppBundle:Task');
-        $tasks = $repository->findByAuthor($this->getUser()->getUsername());
-        $points = $this->getPoints($tasks);
-        $numberOfTasks = count($tasks);
-        $newTask = array();
-
-        foreach ($tasks as $task)
-        {
-            if($task->getDeadlineDate() == "now"|date("Y-m-d")){
-                $newTask[] = $task;
-            }
-        }
+        /**
+         * @var $paginator \Knp\Component\Pager\Paginator
+         */
+        $paginator = $this->get('knp_paginator');
+        $result = $paginator->paginate(
+            $newTask,
+            $request->query->getInt('page', 1),
+            $request->query->getInt('limit', 10)
+        );
 
         return $this->render(
             'userpage.html.twig',array(
             'username' => $username = $this->getUser()->getUsername(),
-            'tasks' => $newTask, 'points' => $points,
+            'tasks' => $result, 'points' => $points,
             'numberOfTasks' => $numberOfTasks
         ));
     }
+
     /**
      * @Route("/home/finished",name="finished")
      */
@@ -135,10 +152,20 @@ class HomeController extends Controller
             }
         }
 
+        /**
+         * @var $paginator \Knp\Component\Pager\Paginator
+         */
+        $paginator = $this->get('knp_paginator');
+        $result = $paginator->paginate(
+            $newTask,
+            $request->query->getInt('page', 1),
+            $request->query->getInt('limit', 10)
+        );
+
         return $this->render(
             'userpage.html.twig',array(
             'username' => $username = $this->getUser()->getUsername(),
-            'tasks' => $newTask, 'points' => $points,
+            'tasks' => $result, 'points' => $points,
             'numberOfTasks' => $numberOfTasks
         ));
     }
