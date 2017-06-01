@@ -37,7 +37,9 @@ class AsignType extends AbstractType
             ->add('Category', ChoiceType::class, array(
                 'choices' => $categories))
             ->add('author', ChoiceType::class, array(
-                'choices' => $user
+                'choices' => $user,
+                'multiple' => true,
+                'expanded' => true
             ))
             ->add('deadline_date', DateType::class)
             ->add('save', SubmitType::class, array('label' => 'Apply Changes'));

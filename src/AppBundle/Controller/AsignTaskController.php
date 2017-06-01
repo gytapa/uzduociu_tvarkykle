@@ -19,6 +19,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Validator\Constraints\Length;
 
 
 class AsignTaskController extends Controller
@@ -46,6 +47,8 @@ class AsignTaskController extends Controller
             $name = $val->getUsername();
             $users["$name"] = $name;
         }
+        $loggedInUser = $this->getUser()->getUsername();
+        $users = array_diff($users, array($loggedInUser));
 
         $emptyTask = new Task();
         $form = $this->createForm(AsignType::class, $emptyTask, ["username" => $users,"categories" => $categories,"create" => "create"]);
@@ -55,17 +58,23 @@ class AsignTaskController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $taskas = $form->getData();
-            $taskToAdd = new Task();
-            $taskToAdd->setStatus("New");
-            $taskToAdd->setName($taskas->getName());
-            $taskToAdd->setDescription($taskas->getDescription());
-            $taskToAdd->setCategory($taskas->getCategory());
-            $taskToAdd->setAuthor($taskas->getAuthor());
-            $taskToAdd->setDeadlineDate($taskas->getDeadlineDate());
+            $arrayLength = count($taskas->getAuthor());
+            $authorArray = array();
+            $authorArray = $taskas->getAuthor();
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($taskToAdd);
-            $em->flush();
+            foreach ($authorArray as $author) {
+                $taskToAdd = new Task();
+                $taskToAdd->setStatus("New");
+                $taskToAdd->setName($taskas->getName());
+                $taskToAdd->setDescription($taskas->getDescription());
+                $taskToAdd->setCategory($taskas->getCategory());
+                $taskToAdd->setAuthor($author);
+                $taskToAdd->setDeadlineDate($taskas->getDeadlineDate());
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($taskToAdd);
+                $em->flush();
+            }
             return $this->redirectToRoute('homepage');
         }
 

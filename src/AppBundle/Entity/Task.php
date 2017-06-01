@@ -45,7 +45,6 @@ class Task
      *
      * @ORM\Column(type="string", length=100)
      * @ORM\ManyToOne(targetEntity="User", inversedBy="Task")
-     * @Assert\Type("string")
      *
      */
     private $author;
