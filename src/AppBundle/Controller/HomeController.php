@@ -24,21 +24,25 @@ class HomeController extends Controller
     public function succesfulLogin(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-//        $repository = $em->getRepository('AppBundle:Task');
-
-        $queryBuilder = $em->getRepository('AppBundle:Task')->createQueryBuilder('task');
-
-       if ($request->query->getAlnum('search')){
-           $queryBuilder
-               ->where('task.name LIKE :name')
-            ->setParameter('name', '%' . $request->query->getAlnum('search') . '%');
-       }
-        $repository = $queryBuilder->getQuery();
-
-    $tasks = $repository;
-//->findByAuthor($this->getUser()->getUsername());
+        $repository = $this->getDoctrine()->getRepository('AppBundle:Task');
+        $tasks = $repository ->findByAuthor($this->getUser()->getUsername());
         $points = $this->getPoints($tasks);
         $numberOfTasks = count($tasks);
+        $queryBuilder = $em->getRepository('AppBundle:Task')->createQueryBuilder('task');
+        $username = $this->getUser()->getUsername();
+        $queryBuilder = $queryBuilder->where('task.author LIKE :name')->setParameter('name',$username);
+        if ($request->query->getAlnum('search')){
+            $queryBuilder
+                ->where('task.name LIKE :name')
+                ->orwhere('task.status LIKE :name')
+                ->orwhere('task.description LIKE :name')
+                ->orwhere('task.category LIKE :name')
+                ->orwhere('task.deadline_date LIKE :name')
+                ->andwhere('task.author LIKE :username')
+                ->setParameter('username',$username)
+                ->setParameter('name', '%' . $request->query->getAlnum('search') . '%');
+        }
+        $tasks = $queryBuilder->getQuery();
 
         /**
          * @var $paginator \Knp\Component\Pager\Paginator
