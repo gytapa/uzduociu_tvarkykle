@@ -70,12 +70,12 @@ class AsignTaskController extends Controller
                 $taskToAdd->setCategory($taskas->getCategory());
                 $taskToAdd->setAuthor($author);
                 $taskToAdd->setDeadlineDate($taskas->getDeadlineDate());
-
+                $taskToAdd->setConfrim(0);
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($taskToAdd);
                 $em->flush();
             }
-            return $this->redirectToRoute('homepage');
+            return $this->redirectToRoute('asign');
         }
 
         return $this->render('asigntasks.html.twig', array(

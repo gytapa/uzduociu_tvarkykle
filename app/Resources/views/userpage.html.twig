@@ -80,7 +80,13 @@
                 <li>
                     <a href="/asign">
                         <i class="material-icons">description</i>
-                        <p>Asign tasks</p>
+                        <p>Asign Task</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="/asigned">
+                        <i class="material-icons">description</i>
+                        <p>Asiged Tasks</p>
                     </a>
                 </li>
             </ul>
@@ -157,7 +163,7 @@
                         {% for task in tasks %}
                         <tbody>
                         <tr>
-                                <td>{{ counter }}</td>
+                                <td>{{ task.ID}}</td>
                                 {% set counter = counter + 1 %}
                                 <td>{{ task.Status }}</td>
                                 <td>{{ task.Name }}</td>

@@ -75,6 +75,7 @@ class TaskController extends Controller
                 $taskToAdd->setCategory($taskas->getCategory());
                 $taskToAdd->setAuthor($this->getUser()->getUsername());
                 $taskToAdd->setDeadlineDate($taskas->getDeadlineDate());
+                $taskToAdd->setConfrim(1);
 
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($taskToAdd);
@@ -101,6 +102,36 @@ class TaskController extends Controller
         $em->remove($task);
         $em->flush();
         return $this->redirectToRoute('homepage');
+    }
+
+    /**
+     * @Route("/deleted/{id}",name="deletedTask")
+     */
+    public function deleteAction($id)
+    {
+        $repository = $this->getDoctrine()
+            ->getRepository('AppBundle:Task');
+        $em = $this->getDoctrine()->getManager();
+        $task = $repository->find($id);
+        $em->remove($task);
+        $em->flush();
+        return $this->redirectToRoute('asigned');
+    }
+
+    /**
+     * @Route("/accept/{id}",name="acceptTask")
+     */
+    public function acceptAction($id)
+    {
+        $repository = $this->getDoctrine()
+            ->getRepository('AppBundle:Task');
+        $em = $this->getDoctrine()->getManager();
+        $task = $repository->find($id);
+//        dump($em);
+//        die();
+        $task->setConfrim(1);
+        $em->flush();
+        return $this->redirectToRoute('asigned');
     }
 
 }

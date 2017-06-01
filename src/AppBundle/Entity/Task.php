@@ -48,6 +48,12 @@ class Task
      *
      */
     private $author;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $confirmed;
+
     /**
      * @ORM\Column(type="date")
      *
@@ -86,6 +92,30 @@ class Task
     public function getStatus()
     {
         return $this->status;
+    }
+
+    /**
+     * Set confirm
+     *
+     * @param int $confirm
+     *
+     * @return int
+     */
+    public function setConfrim($confirm)
+    {
+        $this->confirmed = $confirm;
+
+        return $this;
+    }
+
+    /**
+     * Get confirm
+     *
+     * @return int
+     */
+    public function getConfirm()
+    {
+        return $this->confirmed;
     }
 
     /**

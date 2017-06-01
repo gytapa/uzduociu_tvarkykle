@@ -26,8 +26,19 @@ class HomeController extends Controller
         $em = $this->getDoctrine()->getManager();
         $repository = $this->getDoctrine()->getRepository('AppBundle:Task');
         $tasks = $repository ->findByAuthor($this->getUser()->getUsername());
+
+        $confirmedTasks = array();
+
+        foreach($tasks as $task)
+        {
+            if($task->getConfirm() == 1){
+                $confirmedTasks[] = $task;
+            }
+        }
+
+
         $points = $this->getPoints($tasks);
-        $numberOfTasks = count($tasks);
+        $numberOfTasks = count($confirmedTasks);
         $queryBuilder = $em->getRepository('AppBundle:Task')->createQueryBuilder('task');
         $username = $this->getUser()->getUsername();
         $queryBuilder = $queryBuilder->where('task.author LIKE :name')->setParameter('name',$username);
@@ -49,7 +60,7 @@ class HomeController extends Controller
          */
         $paginator = $this->get('knp_paginator');
         $result = $paginator->paginate(
-            $tasks,
+            $confirmedTasks,
             $request->query->getInt('page', 1),
             $request->query->getInt('limit', 10)
         );
@@ -73,13 +84,22 @@ class HomeController extends Controller
         $repository = $this->getDoctrine()->getRepository('AppBundle:Task');
         $tasks = $repository->findByAuthor($this->getUser()->getUsername());
         $points = $this->getPoints($tasks);
-        $numberOfTasks = count($tasks);
         $newTask = array();
 
+        $confirmedTasks = array();
+
+        foreach($tasks as $task)
+        {
+            if($task->getConfirm() == 1){
+                $confirmedTasks[] = $task;
+            }
+        }
+
+        $numberOfTasks = count($confirmedTasks);
 
         foreach ($tasks as $task)
         {
-            if($task->getStatus() == "New"){
+            if($task->getStatus() == "New" && $task->getConfirm() == 1){
                 $newTask[] = $task;
             }
         }
@@ -110,12 +130,22 @@ class HomeController extends Controller
         $repository = $this->getDoctrine()->getRepository('AppBundle:Task');
         $tasks = $repository->findByAuthor($this->getUser()->getUsername());
         $points = $this->getPoints($tasks);
-        $numberOfTasks = count($tasks);
         $newTask = array();
+
+        $confirmedTasks = array();
+
+        foreach($tasks as $task)
+        {
+            if($task->getConfirm() == 1){
+                $confirmedTasks[] = $task;
+            }
+        }
+
+        $numberOfTasks = count($confirmedTasks);
 
         foreach ($tasks as $task)
         {
-            if($task->getStatus() == "In Progress"){
+            if($task->getStatus() == "In Progress" && $task->getConfirm() == 1){
                 $newTask[] = $task;
             }
         }
@@ -146,12 +176,22 @@ class HomeController extends Controller
         $repository = $this->getDoctrine()->getRepository('AppBundle:Task');
         $tasks = $repository->findByAuthor($this->getUser()->getUsername());
         $points = $this->getPoints($tasks);
-        $numberOfTasks = count($tasks);
         $newTask = array();
+
+        $confirmedTasks = array();
+
+        foreach($tasks as $task)
+        {
+            if($task->getConfirm() == 1){
+                $confirmedTasks[] = $task;
+            }
+        }
+
+        $numberOfTasks = count($confirmedTasks);
 
         foreach ($tasks as $task)
         {
-            if($task->getStatus() == "Finished"){
+            if($task->getStatus() == "Finished" && $task->getConfirm() == 1){
                 $newTask[] = $task;
             }
         }
